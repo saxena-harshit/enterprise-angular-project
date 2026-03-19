@@ -15,7 +15,10 @@ export class AdminDashboardComponent {
   ngOnInit() {
     this.adminService.getAllUsers().subscribe({
       next: (users: any) => {
-        this.userList = users.users;
+       this.userList = users.users.map((user: any) => {
+  const { password, ...rest } = user;
+  return rest;
+}); 
       },
     });
   }

@@ -1,7 +1,8 @@
 export const API_ENDPOINTS={
-    login:'/user/login',
+    login:'/auth/login',
     users:'/getAllUsers',
     signIn:'/CreateNewUser',
     getallUsers:'/users',
-    getUserById:'/users/'
+    getUserById:'/users/',
+    refreshToken:'/auth/refresh'
 }

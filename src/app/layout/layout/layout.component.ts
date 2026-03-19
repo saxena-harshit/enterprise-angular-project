@@ -1,4 +1,7 @@
 import { Component } from '@angular/core';
+import { AuthService } from '../../core/services/auth.service';
+import { RefreshTokenService } from '../../core/services/refresh-token.service';
+import { StorageService } from '../../core/services/storage.service';
 
 @Component({
   selector: 'app-layout',
@@ -9,4 +12,12 @@ import { Component } from '@angular/core';
 export class LayoutComponent {
 
   
+  constructor(private tokenRefresh:RefreshTokenService,private store:StorageService){
+    this.tokenRefresh.tokenExpired$.subscribe((res:any)=>{
+      if(res){
+        tokenRefresh.refreshToken();
+
+      }
+    })
+  }
 }

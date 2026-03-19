@@ -3,18 +3,26 @@ import { inject } from '@angular/core';
 import { Router } from '@angular/router';
 import { AuthService } from '../services/auth.service';
 import { catchError, throwError } from 'rxjs';
+import { RefreshTokenService } from '../services/refresh-token.service';
 
 export const errorInterceptor: HttpInterceptorFn = (req, next) => {
 
 
   const router = inject(Router);
   const authService= inject(AuthService);
+  const refreshTokenService= inject(RefreshTokenService)
 
   return next(req).pipe(
     catchError((err)=>{
       debugger
       if(err.status===401){
+        const isContinue=confirm("do you want to continue the session ?");
+        if(isContinue){
+          refreshTokenService.tokenExpired$.next(true);
+        }else{
         authService.logOut();
+
+        }
       }
       if(err.status===403){
         alert("access denied");

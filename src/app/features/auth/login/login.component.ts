@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { AuthService } from '../../../core/services/auth.service';
 import { Router } from '@angular/router';
+import { FormFields } from '../../../shared/models/form-fields';
 
 @Component({
   selector: 'app-login',
@@ -12,22 +13,36 @@ import { Router } from '@angular/router';
 export class LoginComponent {
   error = '';
 
+  formFields:FormFields[]=[ {
+    type: 'text',
+    label: 'username',
+    name: 'username',
+    required: true,
+        placeholder:'Enter username'
+
+  }, {
+    type: 'password',
+    label: 'Password',
+    name: 'password',
+    required: true,
+        placeholder:'Enter user Password'
+
+  },];
+  
+
   loginForm!: FormGroup;
   constructor(
-    private fb: FormBuilder,
+   
     private authService: AuthService,
     private router: Router,
   ) {
-    this.loginForm = this.fb.group({
-      username: ['', [Validators.required]],
-      password: ['', [Validators.required]],
-    });
+   
   }
 
-  onSubmit() {
+  onSubmit(data:any) {
     let user = {
-      username: this.loginForm.value.username,
-      password: this.loginForm.value.password,
+      username: data.username,
+      password: data.password,
     };
 
     this.authService.login(user.username, user.password).subscribe({

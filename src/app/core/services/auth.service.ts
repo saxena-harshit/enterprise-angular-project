@@ -1,5 +1,5 @@
 import { inject, Injectable } from '@angular/core';
-import { BehaviorSubject, switchMap, tap } from 'rxjs';
+import { BehaviorSubject, map, Subject, switchMap, tap } from 'rxjs';
 import { AUTHUSER } from '../models/auth.model';
 import { HttpClient } from '@angular/common/http';
 import { environment } from '../../../environment/environment';
@@ -16,26 +16,31 @@ import { User } from '../../models/user.model';
   providedIn: 'root'
 })
 export class AuthService {
-  router = inject(Router)
-  userService=inject(UserService)
-  
+  router = inject(Router);
+
+  userService=inject(UserService);
+
   
 
   private currentUserSubject = new BehaviorSubject<User|null>(null);
   currrentUser$=this.currentUserSubject.asObservable();
+
   constructor(private http :HttpClient,private encryption:EncryptionService,private store:StorageService) {this.getUser(); }
 
   login(username:string, password:string){
-    return this.http.post(`${environment.apiUrl}${API_ENDPOINTS.login}`,{username,password}).pipe(switchMap((user:any)=>{
+    let expiryTIme=1;
+    return this.http.post(`${environment.apiUrl}${API_ENDPOINTS.login}`,{username,password,expiresInMins:expiryTIme}).pipe(switchMap((user:any)=>{
       
       const encrypted_token= this.encryption.encrypt(user.accessToken);
-     return this.userService.getUserByID(user.id).pipe(tap((res:User)=>{
-
-      user.accessToken=encrypted_token;
+      const encrypted_refresh_token=this.encryption.encrypt(user.refreshToken);
+     return this.userService.getUserByID(user.id).pipe(map((res:any)=>{
+      const { password, ...rest } = res;
+      
       this.store.set(STORAGE_KEYS.TOKEN,encrypted_token);
-      this.store.set(STORAGE_KEYS.USER,res);
-      this.currentUserSubject.next(res);
-      console.log(res.role)
+      this.store.set(STORAGE_KEYS.USER,rest);
+      this.store.set(STORAGE_KEYS.REFRESHTOKEN,encrypted_refresh_token);
+      this.currentUserSubject.next(rest);
+      console.log(rest.role)
       }))
       
      
@@ -49,12 +54,17 @@ export class AuthService {
   logOut(){
     this.store.clear();
     this.currentUserSubject.next(null);
-    this.router.navigate(['/login'])
+    this.router.navigate(['/login']);
   }
 
 
   getToken(){
    const encrypted= this.store.get(STORAGE_KEYS.TOKEN);
+   return encrypted? this.encryption.decrypt(encrypted):null;
+  }
+
+  getRefreshToken(){
+    const encrypted= this.store.get(STORAGE_KEYS.REFRESHTOKEN);
    return encrypted? this.encryption.decrypt(encrypted):null;
   }
 
@@ -72,6 +82,7 @@ export class AuthService {
 
   
   }
+
 
   private getUser(){
     const user = this.store.get(STORAGE_KEYS.USER);

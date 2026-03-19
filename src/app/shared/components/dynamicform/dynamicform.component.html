@@ -1,0 +1,41 @@
+<form [formGroup]="myForm" (ngSubmit)="onSubmit()">
+
+    <div *ngFor="let field of fields">
+<mat-form-field>
+  <mat-label>{{ field.label }}</mat-label>
+
+        <ng-container [ngSwitch]="field.type">
+
+    <input *ngSwitchCase="'text'" matInput
+           type="text"
+           [placeholder]="field.placeholder||''"
+           [formControlName]="field.name">
+
+    <input *ngSwitchCase="'password'" matInput
+           type="password"
+           [placeholder]="field.placeholder||''"
+           [formControlName]="field.name">
+
+    <input *ngSwitchCase="'email'" matInput
+           type="email"
+           [placeholder]="field.placeholder||''"
+           [formControlName]="field.name">
+
+  </ng-container>
+
+</mat-form-field>
+
+<mat-form-field  *ngIf="field.type==='select'">
+    <mat-label>Select</mat-label>
+    <mat-select  [formControlName]="field.name">
+        <mat-option *ngFor="let opt of field.options" value="opt">{{opt}}</mat-option>
+    </mat-select>
+</mat-form-field>
+       
+      
+
+
+    </div>
+<button mat-flat-button color="primary" type="submit">
+  Submit
+</button></form>

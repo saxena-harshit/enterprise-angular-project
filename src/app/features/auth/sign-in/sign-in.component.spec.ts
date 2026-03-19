@@ -1,0 +1,26 @@
+import { ComponentFixture, TestBed } from '@angular/core/testing';
+
+import { SignInComponent } from './sign-in.component';
+import { DynamicformComponent } from '../../../shared/components/dynamicform/dynamicform.component';
+import { ReactiveFormsModule } from '@angular/forms';
+
+describe('SignInComponent', () => {
+  let component: SignInComponent;
+  let fixture: ComponentFixture<SignInComponent>;
+
+  beforeEach(async () => {
+    await TestBed.configureTestingModule({
+      declarations: [SignInComponent,DynamicformComponent],
+      imports:[ReactiveFormsModule]
+    })
+    .compileComponents();
+
+    fixture = TestBed.createComponent(SignInComponent);
+    component = fixture.componentInstance;
+    fixture.detectChanges();
+  });
+
+  it('should create', () => {
+    expect(component).toBeTruthy();
+  });
+});
