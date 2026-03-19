@@ -6,9 +6,6 @@ import { DynamicformComponent } from './components/dynamicform/dynamicform.compo
 import { ReactiveFormsModule } from '@angular/forms';
 import { DynamicTableComponent } from './components/dynamic-table/dynamic-table.component';
 import { MaterialModule } from './material/material.module';
-import { AllUserListComponent } from './components/all-user-list/all-user-list.component';
-import { AdminListComponent } from './components/admin-list/admin-list.component';
-import { UserListComponent } from './components/user-list/user-list.component';
 
 
 @NgModule({
@@ -16,10 +13,7 @@ import { UserListComponent } from './components/user-list/user-list.component';
     LoaderComponent,
     DynamicformComponent,
     DynamicTableComponent,
-    AllUserListComponent,
-    AdminListComponent,
-    UserListComponent,
-    
+
   ],
   imports: [
     CommonModule,
