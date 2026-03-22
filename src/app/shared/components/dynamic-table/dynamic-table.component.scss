@@ -1,17 +1,20 @@
-table {
-  width: 100%;
-}
-
-.mat-mdc-form-field {
-  font-size: 14px;
-  width: 100%;
-}
-
-td, th {
-  width: 25%;
-}
 .table-container {
-  overflow-x: auto;   /* enables horizontal scroll */
+  // max-height: 400px;
+  overflow-y: auto;
   width: 100%;
 }
 
+table {
+  width: max-content;
+}
+
+th, td {
+  white-space: nowrap;
+}
+
+.mat-paginator {
+  position: sticky;
+  bottom: 0;
+  z-index: 2;
+  background: white;
+}

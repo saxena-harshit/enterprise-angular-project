@@ -12,6 +12,7 @@ import { AllUsersComponent } from './all-users/all-users.component';
 import { AdminsComponent } from './admins/admins.component';
 import { UsersComponent } from './users/users.component';
 import { ModeratorsComponent } from './moderators/moderators.component';
+import { FormsModule } from '@angular/forms';
 
 
 @NgModule({
@@ -25,6 +26,7 @@ import { ModeratorsComponent } from './moderators/moderators.component';
   ],
   imports: [
     CommonModule,
+    FormsModule,
     DashboardRoutingModule,
     SharedModule
 ]

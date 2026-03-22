@@ -1,21 +1,12 @@
-<h2>Admin Dashboard</h2>
 
-<app-dynamic-table [tableData]="userList"></app-dynamic-table>
 
-<!-- <table border="1">
+<mat-form-field>
+  <mat-label>Select</mat-label>
+  <mat-select [(ngModel)]="selectedValue" (selectionChange)="loadComponent()">
+    <mat-option *ngFor="let value of options" [value]="value">
+      {{value}}
+    </mat-option>
+  </mat-select>
+</mat-form-field>
 
-  <thead>
-    <tr>
-      <th>Username</th>
-      <th>Email</th>
-    </tr>
-  </thead>
-
-  <tbody>
-    <tr *ngFor="let user of userList">
-      <td>{{ user.username }}</td>
-      <td>{{ user.email }}</td>
-    </tr>
-  </tbody>
-
-</table> -->
+<ng-container #container></ng-container>
