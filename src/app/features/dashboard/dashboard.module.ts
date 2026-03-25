@@ -13,6 +13,7 @@ import { AdminsComponent } from './admins/admins.component';
 import { UsersComponent } from './users/users.component';
 import { ModeratorsComponent } from './moderators/moderators.component';
 import { FormsModule } from '@angular/forms';
+import { A11yModule } from "@angular/cdk/a11y";
 
 
 @NgModule({
@@ -28,7 +29,8 @@ import { FormsModule } from '@angular/forms';
     CommonModule,
     FormsModule,
     DashboardRoutingModule,
-    SharedModule
+    SharedModule,
+    A11yModule
 ]
 })
 export class DashboardModule { }

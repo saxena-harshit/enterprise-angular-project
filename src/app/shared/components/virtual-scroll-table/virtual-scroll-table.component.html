@@ -1,0 +1,27 @@
+<div class="table">
+
+    <div class="scroll-container">
+     
+  <div class="table-inner">
+
+    <div class="header">
+      <div class="cell" *ngFor="let coulmnName of keys">
+        {{coulmnName}}
+      </div>
+    </div>
+
+    <cdk-virtual-scroll-viewport itemSize="50" class="viewport">
+      <div *cdkVirtualFor="let user of tableData;trackBy:trackByUserID" class="row">
+        
+        <div class="cell" *ngFor="let key of keys">
+          <span *ngIf="typeof user[key] ==='object'">
+            {{objToString(user[key])}}
+          </span>
+          <span *ngIf="typeof user[key] !=='object'"> {{user[key]}}</span>
+        </div>
+      </div>
+    </cdk-virtual-scroll-viewport>
+
+  </div>
+    </div>
+</div>

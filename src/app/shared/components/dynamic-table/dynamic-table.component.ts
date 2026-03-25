@@ -3,12 +3,7 @@ import { MatPaginator } from '@angular/material/paginator';
 import { MatSort } from '@angular/material/sort';
 import { MatTableDataSource } from '@angular/material/table';
 
-export interface UserData {
-  id: string;
-  name: string;
-  progress: string;
-  fruit: string;
-}
+
 
 
 @Component({
@@ -26,8 +21,9 @@ export class DynamicTableComponent implements AfterViewInit {
   @ViewChild(MatSort) sort!: MatSort;
 
    ngOnChanges(changes: SimpleChanges) {
+    debugger
     if (changes['tableData'] && this.tableData?.length) {
-
+debugger
       console.log("tableData:", this.tableData);
 
       this.displayedColumns = Object.keys(this.tableData[0]);
@@ -80,19 +76,4 @@ export class DynamicTableComponent implements AfterViewInit {
 }
 
 
-/** Builds and returns a new User. */
-// function createNewUser(id: number): UserData {
-//   const name =
-//     NAMES[Math.round(Math.random() * (NAMES.length - 1))] +
-//     ' ' +
-//     NAMES[Math.round(Math.random() * (NAMES.length - 1))].charAt(0) +
-//     '.';
-
-//   return {
-//     id: id.toString(),
-//     name: name,
-//     progress: Math.round(Math.random() * 100).toString(),
-//     fruit: FRUITS[Math.round(Math.random() * (FRUITS.length - 1))],
-//   };
-// }
 

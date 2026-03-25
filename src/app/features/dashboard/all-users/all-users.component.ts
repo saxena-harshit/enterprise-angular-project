@@ -10,7 +10,7 @@ import { AdminService } from '../../../shared/services/admin.service';
   styleUrl: './all-users.component.scss'
 })
 export class AllUsersComponent {
- userList:User[]=[]
+ userList:any[]=[]
   constructor(private adminService:AdminService ){
    
   }
@@ -22,8 +22,12 @@ export class AllUsersComponent {
   const { password, ...rest } = user;
   return rest;
 }); 
+    console.log("user list in alluserList", this.userList);
+
       },
     });
+  
+    
   }
 
 }

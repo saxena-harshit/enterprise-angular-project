@@ -1,0 +1,15 @@
+.table-container {
+  width: 100%;
+  overflow-x: auto;   /* Enables horizontal scroll */
+}
+
+table {
+  border-collapse: collapse;
+  min-width: max-content;  /* Prevents shrinking */
+}
+
+th, td {
+  border: 1px solid #ccc;
+  padding: 8px;
+  white-space: nowrap;  /* Prevent text wrapping */
+}

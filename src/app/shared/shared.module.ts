@@ -3,9 +3,13 @@ import { CommonModule } from '@angular/common';
 import { LoaderComponent } from './components/loader/loader.component';
 import { LayoutComponent } from '../layout/layout/layout.component';
 import { DynamicformComponent } from './components/dynamicform/dynamicform.component';
-import { ReactiveFormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { DynamicTableComponent } from './components/dynamic-table/dynamic-table.component';
 import { MaterialModule } from './material/material.module';
+import { ManualTableComponent } from './components/manual-table/manual-table.component';
+import { A11yModule } from "@angular/cdk/a11y";
+import { ScrollingModule } from '@angular/cdk/scrolling';
+import { VirtualScrollTableComponent } from './components/virtual-scroll-table/virtual-scroll-table.component';
 
 
 @NgModule({
@@ -13,15 +17,19 @@ import { MaterialModule } from './material/material.module';
     LoaderComponent,
     DynamicformComponent,
     DynamicTableComponent,
+    ManualTableComponent,
+    VirtualScrollTableComponent,
 
   ],
   imports: [
     CommonModule,
-    ReactiveFormsModule,MaterialModule
-  ],exports:[
+    ReactiveFormsModule, MaterialModule,
+    A11yModule,FormsModule,
+    ScrollingModule
+],exports:[
     LoaderComponent,
     DynamicformComponent,
-    MaterialModule,DynamicTableComponent
+    MaterialModule,DynamicTableComponent,ManualTableComponent,VirtualScrollTableComponent
   ]
 })
 export class SharedModule { }

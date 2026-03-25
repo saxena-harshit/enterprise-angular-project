@@ -1,0 +1,52 @@
+
+<div class="example-container">
+  <mat-form-field>
+    <mat-label>Search</mat-label>
+    <input
+      matInput
+      placeholder="Search"
+     [(ngModel)]="searchText"
+    />
+   
+  </mat-form-field>
+</div>
+<div class="table-container">
+  <table>
+    <thead>
+      <tr>
+        <th *ngFor="let columnName of keys" (click)="sort(columnName)">
+          {{columnName}}
+          <span *ngIf="sortColumn===columnName">
+            {{sortDirection==='asc'?'🔼':'🔽'}}
+          </span>
+        </th>
+      </tr>
+    </thead>
+
+    <tbody>
+      <tr *ngFor="let user of Paginated; trackBy: trackByUserID">
+        <td *ngFor="let key of keys">
+          <span *ngIf="typeof user[key] === 'object'">
+            {{ objToString(user[key]) }}
+          </span>
+          <span *ngIf="typeof user[key] !== 'object'">
+            {{ user[key] }}
+          </span>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</div>
+
+<button (click)="page=page-1" [disabled]="page===1">Prev</button>
+<span>{{page}}</span>
+<button (click)="page=page+1" [disabled]="page*pageSize >= tableData.length">Next</button>
+
+<select [(ngModel)]="pageSize">
+  <option value="5">5</option>
+  <option value="10">10</option>
+  <option value="15">15</option>
+  <option value="20">20</option>
+  <option value="25">25</option>
+  <option value="30">30</option>
+</select>
