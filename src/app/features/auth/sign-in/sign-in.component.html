@@ -1,1 +1,7 @@
-<app-dynamicform [fields]="formFields" (formSubmit)="onSubmit($event)"> </app-dynamicform>
+<!-- <app-dynamicform 
+  [fields]="formConfig"
+  (formSubmit)="onSubmit($event)">
+</app-dynamicform> -->
+
+
+<app-dynamic-multi-step-form [formConfig]="formConfig"  (formSubmit)="onSubmit($event)"></app-dynamic-multi-step-form>

@@ -1,0 +1,167 @@
+<div>
+    <button (click)="prevStep()" [disabled]="currentStep===0">Prev Page</button>
+    <button (click)="nextStep()" [disabled]="!isStepValid() || currentStep===formConfig.steps.length-1">Next
+        Page</button>
+</div>
+
+
+<form [formGroup]="myform" (ngSubmit)=" onSubmit()">
+
+    <h1>{{formConfig.steps[currentStep].label}}
+
+    </h1>
+    <div *ngFor="let field of formConfig.steps[currentStep].fields">
+
+        <div *ngIf="field.type==='group'">
+            <h2>{{field.label}}</h2>
+
+            <div [formGroupName]="field.name">
+                <div *ngFor="let subfield of field.fields">
+                    <mat-label>{{subfield.label}}</mat-label>
+                    <div *ngIf="subfield.type==='group'">
+                        <div [formGroupName]='subfield.name'>
+                            <div *ngFor="let sField of subfield.fields">
+                                <mat-label>
+
+                                    {{sField.label}}
+                                </mat-label>
+                                <ng-container [ngSwitch]="sField.type">
+                                    <mat-form-field *ngSwitchCase="'text'">
+                                        <input matInput type="text" [formControlName]="sField.name"
+                                            [placeholder]="sField.placeholder">
+
+                                    </mat-form-field>
+                                    <mat-form-field *ngSwitchCase="'email'">
+                                        <input matInput type="email" [formControlName]="sField.name"
+                                            [placeholder]="sField.placeholder">
+
+                                    </mat-form-field>
+                                    <mat-form-field *ngSwitchCase="'password'">
+                                        <input matInput type="password" [formControlName]="sField.name"
+                                            [placeholder]="sField.placeholder">
+
+                                    </mat-form-field>
+                                    <mat-form-field *ngSwitchCase="'number'">
+                                        <input matInput type="number" [formControlName]="sField.name"
+                                            [placeholder]="sField.placeholder">
+
+                                    </mat-form-field>
+                                    <mat-form-field *ngSwitchCase="'date'">
+                                        <input matInput type="date" [formControlName]="sField.name"
+                                            [placeholder]="sField.placeholder">
+
+                                    </mat-form-field>
+                                    <mat-form-field *ngSwitchCase="'url'">
+                                        <input matInput type="url" [formControlName]="subfield.name"
+                                            [placeholder]="sField.placeholder">
+
+                                    </mat-form-field>
+
+                                </ng-container>
+
+                                <mat-form-field *ngIf="sField.type==='select'">
+                                    <mat-label>Select</mat-label>
+                                    <mat-select [formControlName]="sField.name">
+                                        <mat-option *ngFor="let option of sField.options"
+                                            [value]="option">{{option}}</mat-option>
+                                    </mat-select>
+                                </mat-form-field>
+                            </div>
+                        </div>
+
+                     
+
+                    </div>
+
+                    <ng-container [ngSwitch]="subfield.type">
+                        <mat-form-field *ngSwitchCase="'text'">
+                            <input matInput type="text" [formControlName]="subfield.name"
+                                [placeholder]="subfield.placeholder">
+
+                        </mat-form-field>
+                        <mat-form-field *ngSwitchCase="'email'">
+                            <input matInput type="email" [formControlName]="subfield.name"
+                                [placeholder]="subfield.placeholder">
+
+                        </mat-form-field>
+                        <mat-form-field *ngSwitchCase="'password'">
+                            <input matInput type="password" [formControlName]="subfield.name"
+                                [placeholder]="subfield.placeholder">
+
+                        </mat-form-field>
+                        <mat-form-field *ngSwitchCase="'number'">
+                            <input matInput type="number" [formControlName]="subfield.name"
+                                [placeholder]="subfield.placeholder">
+
+                        </mat-form-field>
+                        <mat-form-field *ngSwitchCase="'date'">
+                            <input matInput type="date" [formControlName]="subfield.name"
+                                [placeholder]="subfield.placeholder">
+
+                        </mat-form-field>
+                        <mat-form-field *ngSwitchCase="'url'">
+                            <input matInput type="url" [formControlName]="subfield.name"
+                                [placeholder]="subfield.placeholder">
+
+                        </mat-form-field>
+
+                    </ng-container>
+
+                    <mat-form-field *ngIf="subfield.type==='select'">
+                        <mat-label>Select</mat-label>
+                        <mat-select [formControlName]="subfield.name">
+                            <mat-option *ngFor="let option of subfield.options" [value]="option">{{option}}</mat-option>
+                        </mat-select>
+                    </mat-form-field>
+                </div>
+            </div>
+
+
+
+        </div>
+        <div *ngIf="field.type!=='group'">
+
+            <mat-label>{{field.label}}</mat-label>
+            <ng-container [ngSwitch]="field.type">
+                <mat-form-field *ngSwitchCase="'text'">
+                    <input matInput type="text" [formControlName]="field.name" [placeholder]="field.placeholder">
+
+                </mat-form-field>
+                <mat-form-field *ngSwitchCase="'email'">
+                    <input matInput type="email" [formControlName]="field.name" [placeholder]="field.placeholder">
+
+                </mat-form-field>
+                <mat-form-field *ngSwitchCase="'password'">
+                    <input matInput type="password" [formControlName]="field.name" [placeholder]="field.placeholder">
+
+                </mat-form-field>
+                <mat-form-field *ngSwitchCase="'number'">
+                    <input matInput type="number" [formControlName]="field.name" [placeholder]="field.placeholder">
+
+                </mat-form-field>
+                <mat-form-field *ngSwitchCase="'date'">
+                    <input matInput type="date" [formControlName]="field.name" [placeholder]="field.placeholder">
+
+                </mat-form-field>
+                <mat-form-field *ngSwitchCase="'url'">
+                    <input matInput type="url" [formControlName]="field.name" [placeholder]="field.placeholder">
+
+                </mat-form-field>
+
+
+            </ng-container>
+
+            <mat-form-field *ngIf="field.type==='select'">
+                <mat-label>Select</mat-label>
+                <mat-select [formControlName]="field.name">
+                    <mat-option *ngFor="let option of field.options" [value]="option">{{option}}</mat-option>
+                </mat-select>
+            </mat-form-field>
+
+        </div>
+
+    </div>
+
+
+    <button type="submit" [disabled]="myform.invalid">submit</button>
+</form>

@@ -10,6 +10,7 @@ import { ManualTableComponent } from './components/manual-table/manual-table.com
 import { A11yModule } from "@angular/cdk/a11y";
 import { ScrollingModule } from '@angular/cdk/scrolling';
 import { VirtualScrollTableComponent } from './components/virtual-scroll-table/virtual-scroll-table.component';
+import { DynamicMultiStepFormComponent } from './dynamic-multi-step-form/dynamic-multi-step-form.component';
 
 
 @NgModule({
@@ -19,6 +20,7 @@ import { VirtualScrollTableComponent } from './components/virtual-scroll-table/v
     DynamicTableComponent,
     ManualTableComponent,
     VirtualScrollTableComponent,
+    DynamicMultiStepFormComponent,
 
   ],
   imports: [
@@ -29,7 +31,7 @@ import { VirtualScrollTableComponent } from './components/virtual-scroll-table/v
 ],exports:[
     LoaderComponent,
     DynamicformComponent,
-    MaterialModule,DynamicTableComponent,ManualTableComponent,VirtualScrollTableComponent
+    MaterialModule,DynamicTableComponent,ManualTableComponent,VirtualScrollTableComponent,DynamicMultiStepFormComponent
   ]
 })
 export class SharedModule { }

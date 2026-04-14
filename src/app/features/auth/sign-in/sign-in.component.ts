@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { FormFields } from '../../../shared/models/form-fields';
+import { USER_SIGN_UP_FORM_CONFIG } from '../../../../assets/config/user-signup-form.config';
 
 @Component({
   selector: 'app-sign-in',
@@ -9,32 +10,9 @@ import { FormFields } from '../../../shared/models/form-fields';
 })
 export class SignInComponent {
 
-  formFields:FormFields[]=[
-   
-  {
-    type: 'text',
-    label: 'Username',
-    name: 'username',
-    required: true,
-    placeholder:'enter UserName'
-  },
-  {
-    type: 'email',
-    label: 'Email',
-    name: 'email',
-    required: true,
-        placeholder:'enter user email'
 
-  },
 
-  {
-    type: 'select',
-    label: 'Role',
-    name: 'role',
-    options: ['ADMIN','USER']
-  }
-  ]
-
+  formConfig = USER_SIGN_UP_FORM_CONFIG;
 
   onSubmit(data:any){
     console.log("helo world");
