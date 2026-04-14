@@ -27,6 +27,14 @@ export class AuthService {
 
   constructor(private http :HttpClient,private encryption:EncryptionService,private store:StorageService) {this.getUser(); }
 
+signIn(user:any){
+  console.log(user)
+  debugger
+  return this.http.post(`${environment.apiUrl}${API_ENDPOINTS.signIN}`,user);
+
+}
+
+
   login(username:string, password:string){
     let expiryTIme=1;
     return this.http.post(`${environment.apiUrl}${API_ENDPOINTS.login}`,{username,password,expiresInMins:expiryTIme}).pipe(switchMap((user:any)=>{
@@ -83,6 +91,8 @@ export class AuthService {
   
   }
 
+
+  
 
   private getUser(){
     const user = this.store.get(STORAGE_KEYS.USER);

@@ -52,8 +52,9 @@ export class DynamicMultiStepFormComponent {
   }
 
   onSubmit(){
-    console.log(this.myform.value)
-  }
+ if (this.myform.valid) {
+      this.formSubmit.emit(this.myform.value);
+    }   }
 
 
 

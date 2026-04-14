@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { FormFields } from '../../../shared/models/form-fields';
-import { USER_SIGN_UP_FORM_CONFIG } from '../../../../assets/config/user-signup-form.config';
+import { AuthService } from '../../../core/services/auth.service';
+import { signUpFields } from '../../../../assets/config/user-signup-form.config';
 
 @Component({
   selector: 'app-sign-in',
@@ -12,11 +13,19 @@ export class SignInComponent {
 
 
 
-  formConfig = USER_SIGN_UP_FORM_CONFIG;
+  formConfig = signUpFields;
+  constructor(private authService:AuthService){}
 
   onSubmit(data:any){
     console.log("helo world");
     console.log(data);
+    debugger
+  
+   
+    this.authService.signIn(data).subscribe((user:any)=>{
+      console.log(user)
+    })
+
     
     
   }

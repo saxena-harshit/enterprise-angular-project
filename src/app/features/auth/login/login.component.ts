@@ -3,6 +3,7 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { AuthService } from '../../../core/services/auth.service';
 import { Router } from '@angular/router';
 import { FormFields } from '../../../shared/models/form-fields';
+import { formFields } from '../../../../assets/config/user-login-form.config';
 
 @Component({
   selector: 'app-login',
@@ -13,22 +14,7 @@ import { FormFields } from '../../../shared/models/form-fields';
 export class LoginComponent {
   error = '';
 
-  formFields:FormFields[]=[ {
-    type: 'text',
-    label: 'username',
-    name: 'username',
-    required: true,
-        placeholder:'Enter username'
-
-  }, {
-    type: 'password',
-    label: 'Password',
-    name: 'password',
-    required: true,
-        placeholder:'Enter user Password'
-
-  },];
-  
+  formFields=formFields;
 
   loginForm!: FormGroup;
   constructor(
