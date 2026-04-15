@@ -10,22 +10,46 @@ export class DynamicMultistepFormService {
   constructor(private fb:FormBuilder) { }
 
 
-  createForm(config:any){
+  createForm(config:any,user:any){
+    console.log(user);
+    
+       
     const form= this.fb.group({});
     config.steps.forEach((step:any) => {
       step.fields.forEach((field:any) => {
-        this.addFields(form,field)
+      if (field.name === "username") {
+  field.value = user?.username;
+}
+
+if (field.name === "email") {
+  field.value = user?.email;
+}
+
+if (field.name === "firstName") {
+  field.value = user?.firstName;
+}
+
+if (field.name === "lastName") {
+  field.value = user?.lastName;
+}
+
+if (field.name === "maidenName") {
+  field.value = user?.maidenName;
+}
+
+console.log(field.value);
+        this.addFields(form,field,field.value);
         
       });
       
     });
     return form;
   }
-addFields(form:FormGroup,field:any ){
+addFields(form:FormGroup,field:any,fieldValue:any ){
   if(field.type==="group"){
     const subForm=this.fb.group({});
     field.fields.forEach((subField:any)=>{
-      this.addFields(subForm,subField);
+      this.addFields(subForm,subField,fieldValue);
 
 
     })
@@ -37,6 +61,9 @@ addFields(form:FormGroup,field:any ){
   if( field.required){
     validators.push(Validators.required)
   }
-  form.addControl(field.name,this.fb.control('',validators));
+  form.addControl(field.name,this.fb.control( {
+      value: fieldValue || '',
+      disabled: !!fieldValue   // 👈 disables if value exists
+    },validators));
 }
 }

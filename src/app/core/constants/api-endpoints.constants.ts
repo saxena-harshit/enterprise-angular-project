@@ -4,5 +4,6 @@ export const API_ENDPOINTS={
     getallUsers:'/users',
     getUserById:'/users/',
     refreshToken:'/auth/refresh',
-    signIN:'/users/add'
+    signIN:'/users/add',
+    editUser:'/users/id'
 }

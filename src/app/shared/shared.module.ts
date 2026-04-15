@@ -11,6 +11,8 @@ import { A11yModule } from "@angular/cdk/a11y";
 import { ScrollingModule } from '@angular/cdk/scrolling';
 import { VirtualScrollTableComponent } from './components/virtual-scroll-table/virtual-scroll-table.component';
 import { DynamicMultiStepFormComponent } from './dynamic-multi-step-form/dynamic-multi-step-form.component';
+import { PopupComponent } from './components/popup/popup.component';
+import { MatDialogContent, MatDialogActions } from "@angular/material/dialog";
 
 
 @NgModule({
@@ -21,17 +23,20 @@ import { DynamicMultiStepFormComponent } from './dynamic-multi-step-form/dynamic
     ManualTableComponent,
     VirtualScrollTableComponent,
     DynamicMultiStepFormComponent,
+    PopupComponent,
 
   ],
   imports: [
     CommonModule,
     ReactiveFormsModule, MaterialModule,
-    A11yModule,FormsModule,
-    ScrollingModule
+    A11yModule, FormsModule,
+    ScrollingModule,
+    MatDialogContent,
+    MatDialogActions
 ],exports:[
     LoaderComponent,
     DynamicformComponent,
-    MaterialModule,DynamicTableComponent,ManualTableComponent,VirtualScrollTableComponent,DynamicMultiStepFormComponent
+    MaterialModule,DynamicTableComponent,ManualTableComponent,VirtualScrollTableComponent,DynamicMultiStepFormComponent,
   ]
 })
 export class SharedModule { }

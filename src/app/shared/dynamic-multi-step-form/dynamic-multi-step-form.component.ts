@@ -12,14 +12,16 @@ export class DynamicMultiStepFormComponent {
 
   @Input() formConfig:any;
   @Output() formSubmit=new EventEmitter();
-  
+  @Input() currentUser:any;
   myform!:FormGroup;
 
   currentStep =0 ;
 
   constructor(private dfs:DynamicMultistepFormService){}
   ngOnInit(){
-    this.myform=this.dfs.createForm(this.formConfig);
+    console.log(this.currentUser);
+    
+    this.myform=this.dfs.createForm(this.formConfig,this.currentUser);
   }
 
 

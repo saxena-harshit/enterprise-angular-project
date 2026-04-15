@@ -25,6 +25,10 @@ export class DynamicformComponent {
   onSubmit(){
    if (this.myForm.valid) {
       this.formSubmit.emit(this.myForm.value);
+      setTimeout(() => {
+        this.myForm.reset()
+      }, 3000);
+
     } 
   }
 

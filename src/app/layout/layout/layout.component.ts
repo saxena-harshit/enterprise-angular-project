@@ -13,6 +13,8 @@ export class LayoutComponent {
 
   
   constructor(private tokenRefresh:RefreshTokenService,private store:StorageService){
+  console.log("layout loaded");
+  
     this.tokenRefresh.tokenExpired$.subscribe((res:any)=>{
       if(res){
         tokenRefresh.refreshToken();

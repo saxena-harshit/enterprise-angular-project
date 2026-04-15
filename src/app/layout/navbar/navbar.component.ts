@@ -15,6 +15,8 @@ currUser:any;
 
 constructor(private authService:AuthService,private refreshTokenservice:RefreshTokenService){
 }
+
+
 ngOnInit(){
   
   this.currUser=this.authService.getCurrentUser();
@@ -24,9 +26,6 @@ ngOnInit(){
 
   logOut(){
     this.authService.logOut();
-
-
-
 
   }
 

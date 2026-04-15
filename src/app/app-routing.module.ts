@@ -1,7 +1,6 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { LoginComponent } from './features/auth/login/login.component';
-import { DashboardComponent } from './features/dashboard/dashboard/dashboard.component';
 import { authGuard } from './core/guards/auth.guard';
 import { SignInComponent } from './features/auth/sign-in/sign-in.component';
 
@@ -24,7 +23,17 @@ const routes: Routes = [
       import('./features/dashboard/dashboard.module')
         .then(m => m.DashboardModule),
     canActivate:[authGuard]
+  },
+  {
+    path:'completeProfile',
+    // component:CompleteProfileComponent
+  loadChildren: () =>{
+    console.log("loading user module");
+ return import('./features/user/user.module').then(m => m.UserModule)
+
   }
+  }
+  
 ];
 
 @NgModule({

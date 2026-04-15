@@ -6,10 +6,11 @@
   <!-- Menu -->
   <ul class="navbar-nav mx-auto">
     <li class="nav-item">
-      <a class="nav-link" href="#">Link 1</a>
+      <a *ngIf="currUser.role==='admin'" class="nav-link" routerLink="/dashboard/admin/">Home</a>
+      <a *ngIf="currUser.role!='admin'" class="nav-link" routerLink="/dashboard">Home</a>
     </li>
     <li class="nav-item">
-      <a class="nav-link" href="#">Link 2</a>
+      <a class="nav-link" routerLink="/completeProfile">edit</a>
     </li>
     <li class="nav-item">
       <a class="nav-link" href="#">Link 3</a>

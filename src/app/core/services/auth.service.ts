@@ -34,6 +34,12 @@ signIn(user:any){
 
 }
 
+editUser(user:any){
+  const currentUser=this.getCurrentUser();
+  if(!currentUser) return;  
+  return this.http.put(`${environment.apiUrl}${API_ENDPOINTS.editUser.replace('id',currentUser.id.toString())}`,user)
+}
+
 
   login(username:string, password:string){
     let expiryTIme=1;
