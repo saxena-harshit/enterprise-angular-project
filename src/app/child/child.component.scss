@@ -1,0 +1,32 @@
+.dropdown-container {
+  width: 250px;
+  position: relative;
+}
+
+.dropdown {
+  position: absolute;
+  width: 100%;
+  max-height: 200px;
+  
+  border: 1px solid #ccc;
+  background: white;
+  overflow-y: auto;
+  z-index: 1000;
+}
+
+.option {
+  padding: 10px;
+  cursor: pointer;
+}
+
+.option:hover {
+  background: #f5f5f5;
+}
+
+.chip {
+  display: inline-block;
+  margin: 5px;
+  padding: 5px 10px;
+  border-radius: 20px;
+  background: #e0e0e0;
+}     

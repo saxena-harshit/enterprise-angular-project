@@ -20,6 +20,8 @@ import { EffectsModule } from '@ngrx/effects';
 import { StoreDevtoolsModule } from '@ngrx/store-devtools';
 import { StoreRouterConnectingModule } from '@ngrx/router-store';
 import { MatDialogModule } from '@angular/material/dialog';
+import { FormsModule } from "@angular/forms";
+import { ChildComponent } from './child/child.component';
 
 @NgModule({
   declarations: [
@@ -28,6 +30,7 @@ import { MatDialogModule } from '@angular/material/dialog';
     FooterComponent,
     SidebarComponent,
     LayoutComponent,
+    ChildComponent,
     
   ],
   imports: [
@@ -40,8 +43,9 @@ import { MatDialogModule } from '@angular/material/dialog';
     StoreModule.forRoot({}, {}),
     EffectsModule.forRoot([]),
     StoreDevtoolsModule.instrument({ maxAge: 25, logOnly: !isDevMode() }),
-    StoreRouterConnectingModule.forRoot()
-  ],
+    StoreRouterConnectingModule.forRoot(),
+    FormsModule
+],
   providers: [provideHttpClient(withInterceptors([authInterceptor,loaderInterceptor,errorInterceptor]))],
   bootstrap: [AppComponent]
 })

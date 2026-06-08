@@ -1,3 +1,28 @@
 <app-loader></app-loader>
 <router-outlet></router-outlet>
 <!-- https://chatgpt.com/share/69b32259-5f38-800b-8dbd-cf0385e7052a -->
+ <app-child></app-child>
+ <h1 #myinput>Hello world</h1>
+ <button type="button" (click)="focusInput()">focus</button>
+
+
+
+ <div class="dropdown-box">
+    <input type="text" [(ngModel)]="searchText"
+    (focus)="isdropDownOpen=true" 
+    (input)="filtredCityfn()"
+    >
+    <div class="dropdown" *ngIf="isdropDownOpen">
+
+        <div class="opt" *ngFor="let city of filteredCity" (click)="selectedCityfn(city)">
+            {{city}}
+
+        </div>
+    </div>
+ </div>
+ <div class="result">
+    <span *ngFor="let city of selctedCity">{{city}}
+        <button (click)="removeCity(city)">X</button>
+    </span>
+
+ </div>

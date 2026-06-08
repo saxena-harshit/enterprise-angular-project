@@ -1,0 +1,28 @@
+<p>child works!</p>
+
+<div class="dropdown-container">
+    <input type="text" [(ngModel)]="searchText" (focus)="isDropdownOpen = true" (input)="filterOptions()" placeholder="search city">
+    <div
+  class="dropdown"
+  *ngIf="isDropdownOpen">
+        <div class="option"  *ngFor="let city of filteredCity" (click)="selectCity(city)">
+            {{city}}
+        </div>
+        <div *ngIf="filteredCity.length===0">
+            no matching results
+        </div>
+    </div>
+
+</div>
+
+<div class="selcted-container">
+    <span class="chip"
+    *ngFor="let city of selctedCity">
+{{city}}
+<button
+    (click)="removeCity(city)">
+    x
+  </button></span>
+
+  
+</div>
