@@ -8,13 +8,13 @@ import { DynamicTableComponent } from './components/dynamic-table/dynamic-table.
 import { MaterialModule } from './material/material.module';
 import { ManualTableComponent } from './components/manual-table/manual-table.component';
 import { A11yModule } from "@angular/cdk/a11y";
-import { ScrollingModule } from '@angular/cdk/scrolling';
 import { VirtualScrollTableComponent } from './components/virtual-scroll-table/virtual-scroll-table.component';
 import { DynamicMultiStepFormComponent } from './dynamic-multi-step-form/dynamic-multi-step-form.component';
 import { PopupComponent } from './components/popup/popup.component';
 import { MatDialogContent, MatDialogActions } from "@angular/material/dialog";
-
-
+import { DynamicFormJobApplicationComponent } from './components/dynamic-form-job-application/dynamic-form-job-application.component';
+import { MatSelectModule } from '@angular/material/select';
+import { ScrollingModule } from '@angular/cdk/scrolling';
 @NgModule({
   declarations: [
     LoaderComponent,
@@ -24,19 +24,22 @@ import { MatDialogContent, MatDialogActions } from "@angular/material/dialog";
     VirtualScrollTableComponent,
     DynamicMultiStepFormComponent,
     PopupComponent,
+    DynamicFormJobApplicationComponent,
 
   ],
   imports: [
     CommonModule,
+    MatSelectModule,
     ReactiveFormsModule, MaterialModule,
     A11yModule, FormsModule,
     ScrollingModule,
     MatDialogContent,
-    MatDialogActions
+    MatDialogActions,
 ],exports:[
     LoaderComponent,
     DynamicformComponent,
     MaterialModule,DynamicTableComponent,ManualTableComponent,VirtualScrollTableComponent,DynamicMultiStepFormComponent,
+    DynamicFormJobApplicationComponent
   ]
 })
 export class SharedModule { }

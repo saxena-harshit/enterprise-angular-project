@@ -1,0 +1,123 @@
+<p>dynamic-form-job-application works!</p>
+<button (click)="print()">print</button>
+<button (click)="prevStep()" [disabled]="currentStep==0">Prev</button>
+<button (click)="nextStep()" [disabled]="currentStep==config.steps.length-1">Next</button>
+
+<form [formGroup]="myForm">
+    <h2>{{currentStepConfig.label}}</h2>
+
+    <div *ngFor="let field of currentStepConfig.fields">
+
+        <div *ngIf="field.type=='group'">
+            <fieldset [formGroup]="getGroup(myForm,field.name)">
+                <div *ngFor="let subfields of field.fields">
+                    <div *ngIf="subfields.type=='text' ||  subfields.type=='date'">
+                        <label>
+                            {{subfields.label}}
+                        </label>
+                        <input [type]="subfields.type" [placeholder]="subfields.placeholder"
+                            [formControlName]="subfields.name">
+                    </div>
+
+
+                    <div *ngIf="subfields.type==='group'">
+                        <fieldset [formGroup]="getGroup(getGroup(myForm,field.name),subfields.name)">
+                            <label>
+                                {{subfields.label}}hello
+                            </label>
+
+                            <div *ngFor="let child of subfields.fields">
+
+                                <label>{{child.label}}</label>
+
+                                <input *ngIf="child.type==='text' || child.type==='date'" [type]="child.type"
+                                    [formControlName]="child.name">
+
+                            </div>
+
+                        </fieldset>
+                    </div>
+
+                </div>
+
+            </fieldset>
+        </div>
+        <div *ngIf="field.type=='formArray'">
+            <button type="button" (click)="addItem(field)">{{field.addButtonText}}</button>
+            <!-- <pre>{{myForm.value| json}}</pre> -->
+
+            <div *ngFor="let item of getFormArray(field.name).controls;let i = index" [formGroup]="$any(item)">
+                {{field.label}} {{i+1}}
+                <div *ngFor="let subfields of field.fields">
+
+                    <div *ngIf="subfields.type=='number' || subfields.type=='text'">
+                        {{subfields.label}}
+                        <input [type]="subfields.type" [placeholder]="subfields.placeholder"
+                            [formControlName]="subfields.name">
+                    </div>
+
+                    <div *ngIf="subfields.type=='select'">
+                        <label>{{subfields.label}}</label>
+                        <select [formControlName]="subfields.name">
+                            <option value="">select an option</option>
+
+                            <option *ngFor="let option of subfields.options" [value]="option">{{option}}</option>
+                        </select>
+                    </div>
+
+                </div>
+                <button (click)="removeItem(field.name,i)">remove</button>
+
+
+
+
+            </div>
+
+        </div>
+
+
+        <ng-container *ngIf="field.type!=='group' && field.type!=='formArray'">
+
+            <div *ngIf="field.type === 'textarea'">
+
+                <label>{{field.label}}</label>
+
+                <textarea [formControlName]="field.name">
+  </textarea>
+
+            </div>
+            <div *ngIf="
+          field.type === 'text' ||
+          field.type === 'email' ||
+          field.type === 'number' ||
+          field.type === 'date' ||
+          field.type === 'tel'
+        "><label [for]="field.name">{{field.label}}</label>
+                <input [type]="field.type" [placeholder]="field.placeholder" [formControlName]="field.name">
+            </div>
+            <div *ngIf="field.type=='radio'">
+                <label for="field.name">{{field.label}}</label>
+
+                <div *ngFor="let option of field.options">
+
+                    <input [type]="field.type" [value]="option" [formControlName]="field.name">
+                    {{option}}
+                </div>
+                <div *ngIf="field.type=='select'">
+                    <select *ngIf="field.type === 'select'" [formControlName]="field.name">
+
+                        <option *ngFor="let option of field.options" [value]="option">
+
+                            {{option}}
+
+                        </option>
+
+                    </select>
+                </div>
+            </div>
+
+        </ng-container>
+
+    </div>
+
+</form>

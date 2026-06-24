@@ -22,6 +22,7 @@ import { StoreRouterConnectingModule } from '@ngrx/router-store';
 import { MatDialogModule } from '@angular/material/dialog';
 import { FormsModule } from "@angular/forms";
 import { ChildComponent } from './child/child.component';
+import { DynamicFormJobApplicationComponent } from './shared/components/dynamic-form-job-application/dynamic-form-job-application.component';
 
 @NgModule({
   declarations: [
@@ -44,7 +45,7 @@ import { ChildComponent } from './child/child.component';
     EffectsModule.forRoot([]),
     StoreDevtoolsModule.instrument({ maxAge: 25, logOnly: !isDevMode() }),
     StoreRouterConnectingModule.forRoot(),
-    FormsModule
+    FormsModule,SharedModule
 ],
   providers: [provideHttpClient(withInterceptors([authInterceptor,loaderInterceptor,errorInterceptor]))],
   bootstrap: [AppComponent]
